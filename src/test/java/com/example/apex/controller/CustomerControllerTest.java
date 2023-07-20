@@ -75,9 +75,6 @@ class CustomerControllerTest {
 
         // Act
         Customer customer = controller.getById(id);
-        System.out.println("Checking debugger!!!");
-
-        System.out.println("End Debugging!!!");
 
         //Assert
         assertEquals(id, customer.getId());
