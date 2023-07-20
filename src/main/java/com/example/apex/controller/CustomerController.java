@@ -2,6 +2,8 @@ package com.example.apex.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +33,9 @@ import com.example.apex.repository.CustomerRepository;
 @RestController
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
-	
+	private final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 	private final CustomerRepository repo;
-	
+
 	public CustomerController(CustomerRepository repository) {
 		this.repo = repository;
 	}
@@ -41,6 +43,7 @@ public class CustomerController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Customer createCustomer(@RequestBody Customer newCustomer) {
+		logger.debug("Inside the createCustomer method!!!");
 		return this.repo.save(newCustomer);
 	}
 	
