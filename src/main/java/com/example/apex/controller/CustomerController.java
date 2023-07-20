@@ -43,7 +43,7 @@ public class CustomerController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Customer createCustomer(@RequestBody Customer newCustomer) {
-		logger.debug("Inside the createCustomer method conflict!!!");
+		logger.debug("Inside the createCustomer conflict!!!");
 		return this.repo.save(newCustomer);
 	}
 	
