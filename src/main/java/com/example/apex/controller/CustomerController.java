@@ -49,6 +49,7 @@ public class CustomerController {
 	
 	@PutMapping
 	public Customer updateCustomer(@RequestBody Customer newCustomer) {
+		logger.debug("Inside updateCustomer method!!!");
 		return this.repo.save(newCustomer);
 	}
 	

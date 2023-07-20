@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -60,6 +62,27 @@ class CustomerControllerTest {
 
 
     //test2
+
+    @Test
+    void testFindById() {
+        long id = 1001l;
+
+        Customer returnedCustomer = new Customer();
+        returnedCustomer.setId(1001L);
+        returnedCustomer.setFirstName("Thoth");
+
+        when(repo.findById(any())).thenReturn(Optional.of(returnedCustomer));
+
+        // Act
+        Customer customer = controller.getById(id);
+        System.out.println("Checking debugger!!!");
+
+        System.out.println("End Debugging!!!");
+
+        //Assert
+        assertEquals(id, customer.getId());
+    }
+
 
 
     //test3
