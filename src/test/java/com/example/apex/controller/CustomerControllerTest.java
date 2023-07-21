@@ -6,8 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -84,7 +87,29 @@ class CustomerControllerTest {
         assertEquals(id, customer.getId());
     }
 
-
-
     //test3
+
+
+    @Test
+    void testGetAllCustomer(){
+        Customer customer1 = new Customer();
+        customer1.setId(1L);
+        customer1.setFirstName("Andrew");
+
+        Customer customer2 = new Customer();
+        customer2.setId(2L);
+        customer2.setFirstName("Austin");
+
+        List<Customer> customerList = new ArrayList<>();
+        customerList.add(customer1);
+        customerList.add(customer2);
+
+        Mockito.when(repo.findAll()).thenReturn(customerList);
+
+        List<Customer> customer = controller.getAll();
+
+        assertEquals(2, customer.size());
+        assertEquals(customer, customerList);
+        Mockito.verify(repo, Mockito.times(1)).findAll();
+    }
 }
