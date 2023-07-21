@@ -2,6 +2,7 @@ package com.example.apex.controller;
 
 import com.example.apex.model.Customer;
 import com.example.apex.repository.CustomerRepository;
+import com.google.common.truth.Truth;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -62,6 +63,8 @@ class CustomerControllerTest {
         // Assert
         assertEquals(actual.getId(), savedCustomer.getId());
         assertEquals(actual.getFirstName(), savedCustomer.getFirstName());
+        //Truth
+        Truth.assertThat(actual.getId()).isEqualTo(savedCustomer.getId());
     }
 
 
