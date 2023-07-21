@@ -112,4 +112,22 @@ class CustomerControllerTest {
         assertEquals(customer, customerList);
         Mockito.verify(repo, Mockito.times(1)).findAll();
     }
+
+
+    //Pushed the code so that easier to pull rather than see my screen
+    //I am confused on this method. Specifically, on how to test this method, because it has no return type, so
+    // return null rakhne ki k rakhne also Mockito.when garda k rakhne
+    @Test
+    void testDeleteCustomerById(){
+        long id = 120L;
+        Customer customer = new Customer();
+        customer.setId(id);
+        customer.setFirstName("Austin");
+
+        //Mockito.when(repo.deleteById(id)).thenReturn(null);
+
+        controller.deleteById(id);
+
+        Mockito.verify(repo, Mockito.times(1)).deleteById(Mockito.anyLong());
+    }
 }
