@@ -27,6 +27,11 @@ import com.example.apex.repository.CustomerRepository;
 -	Retrieve All Customers done
 -	BONUS:  Retrieve All Customers By Last Name
 
+ 	HOSTURL: localhost
+    PORT: 8080
+ 	REQUEST MAPPING: /api/v1/customers/10001
+ 	METHOD : GET
+
  * @author rubin
  *
  */
@@ -39,7 +44,7 @@ public class CustomerController {
 	public CustomerController(CustomerRepository repository) {
 		this.repo = repository;
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Customer createCustomer(@RequestBody Customer newCustomer) {

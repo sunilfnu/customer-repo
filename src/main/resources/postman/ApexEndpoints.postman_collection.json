@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "7468cc80-9227-4616-8464-2406554a8f1f",
+		"name": "ApexEndpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28758542",
+		"_collection_link": "https://red-shuttle-499854.postman.co/workspace/7308e0cd-8b19-4991-a186-aa11a793bf60/collection/28758542-7468cc80-9227-4616-8464-2406554a8f1f?action=share&creator=28758542&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "GET Customer By ID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// make call to the Outh2/ token",
+							"",
+							"",
+							"// set the token to environemt varaible",
+							"",
+							"",
+							"",
+							"// Company",
+							"",
+							"    // Local Environment -> localhost:8080/",
+							"        // basic auth - local1, pass1",
+							"",
+							"    // DEV Environment / UAT Environemtn. -> http://dev.apex.org:8081",
+							"            // basic auth - dev1, devpass1",
+							"",
+							"    // QA Evnironment  ->  http://qa.apex.org:8081",
+							"                // basic auth - qa1, qapass1",
+							"",
+							"    // Prod   ->  http://apex.org:8081",
+							"                    // basic auth - prod credentials",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{userName}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "new token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 19991,\n    \"firstName\": \"Apex\",\n    \"lastName\" : \"Tutorial\",\n    \"emailId\" : \"apex@tutorial.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://dev.apex.org:8081/api/v1/customers",
+					"protocol": "http",
+					"host": [
+						"dev",
+						"apex",
+						"org"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
