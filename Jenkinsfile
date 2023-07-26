@@ -36,8 +36,9 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerpwd')]) {
                         sh 'docker login -u mamatniroula1 -p ${dockerpwd}'
-                        sh 'docker push mamatniroula1/apex-project'
                     }
+                    sh 'docker push mamatniroula1/apex-project'
+
                 }
 
             }
