@@ -43,12 +43,13 @@ public class CustomerController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Customer createCustomer(@RequestBody Customer newCustomer) {
-		logger.debug("Inside the createCustomer method!!!");
+		logger.debug("Inside the createCustomer conflict!!!");
 		return this.repo.save(newCustomer);
 	}
 	
 	@PutMapping
 	public Customer updateCustomer(@RequestBody Customer newCustomer) {
+		logger.debug("Inside updateCustomer method!!!");
 		return this.repo.save(newCustomer);
 	}
 	
