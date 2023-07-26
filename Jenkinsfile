@@ -11,13 +11,14 @@ pipeline {
             steps {
                 // Run Maven.
                 sh 'mvn clean package'
+                echo "packaging"
             }
         }
 
         stage('Test') {
             steps {
                 sh 'mvn test'
-                echo "Testing..."
+                echo 'Testing...''
             }
         }
     }
