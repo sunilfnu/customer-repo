@@ -12,6 +12,7 @@ pipeline {
                 // Run Maven.
                 sh 'mvn clean package'
                 echo "packaging"
+                echo 'ngrok testing'
             }
         }
 
