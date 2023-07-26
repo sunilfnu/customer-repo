@@ -13,6 +13,7 @@ pipeline {
                 sh 'mvn clean package'
                 echo "packaging"
                 echo 'ngrok testing...'
+                echo 'Testing webhook'
             }
         }
 
