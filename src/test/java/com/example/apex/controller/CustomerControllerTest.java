@@ -7,12 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class CustomerControllerTest {
+    private Logger logger = LoggerFactory.getLogger(CustomerControllerTest.class);
 
     /**
      *  Method Signature
@@ -40,6 +43,7 @@ class CustomerControllerTest {
 
     @Test
     void testCreateCustomer(){
+        logger.info("Inside test create...");
         // Arrange
         Customer customer = new Customer();
         customer.setFirstName("Thoth");
@@ -47,6 +51,8 @@ class CustomerControllerTest {
         Customer savedCustomer = new Customer();
         savedCustomer.setId(1001L);
         savedCustomer.setFirstName("Thoth");
+
+        logger.info("After customer is created...");
 
         when(repo.save(any())).thenReturn(savedCustomer);
 
