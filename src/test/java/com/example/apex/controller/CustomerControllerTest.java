@@ -78,6 +78,7 @@ class CustomerControllerTest {
 
     @Test
     void testFindById() {
+        logger.info("Inside test find by Id");
         long id = 1001l;
 
         Customer returnedCustomer = new Customer();
