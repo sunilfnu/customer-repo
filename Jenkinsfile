@@ -22,5 +22,14 @@ pipeline {
                 echo 'Testing...'
             }
         }
+
+        stage('Build Docker image') {
+            steps {
+                script {
+                    sh 'docker build -t mamatniroula1/apex-project .'
+                }
+            }
+
+        }
     }
 }
