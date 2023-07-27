@@ -40,7 +40,14 @@ pipeline {
                     }
                     sh 'docker push mamatniroula1/apex-project'
                 }
+            }
+        }
 
+        stage('Deploy to kubernetes') {
+            steps {
+                script {
+                    kubernetesDeploy configs: 'deployment.yaml', kubeConfig: [path: ''], kubeconfigId: 'kubernetesconfigpwd', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                }
             }
         }
     }
