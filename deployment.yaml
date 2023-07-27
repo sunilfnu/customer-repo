@@ -27,7 +27,7 @@ metadata:
   name:springboot-apexsvc
 spec:
   selector:
-    app:spring-boot-apex
+    app: spring-boot-apex
   ports:
     - protocol: "TCP"
       port: 8080
