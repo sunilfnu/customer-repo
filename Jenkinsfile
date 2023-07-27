@@ -46,7 +46,7 @@ pipeline {
         stage('Deploy to kubernetes') {
             steps {
                 script {
-                    kubernetesDeploy configs: 'deployment.yaml', kubeConfig: [path: ''], kubeconfigId: 'kubernetesconfigpwd', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                    kubernetesDeploy configs: 'deployment.yaml', kubeconfigId: 'kubernetesconfigpwd']
                 }
             }
         }
