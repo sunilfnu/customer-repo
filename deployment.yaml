@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-apex
-          image: mamatniroula1/apex-project
+          image:mamatniroula1/apex-project
           ports:
             - containerPort: 80
 ---
