@@ -23,8 +23,8 @@ class CustomerControllerTest {
     private Logger logger = LoggerFactory.getLogger(CustomerControllerTest.class);
 
     /*
-    * Roshan Change
-    * */
+     * Roshan Change
+     * */
 
     /**
      *  Method Signature
@@ -34,24 +34,25 @@ class CustomerControllerTest {
      * */
 
 
-
     /**
-     *  3As principle
-     *  Arrange
-     *  Act
-     *  Assert
-     * */
+     * 3As principle
+     * Arrange
+     * Act
+     * Assert
+     */
 
-    @Mock CustomerRepository repo;
-    @InjectMocks CustomerController controller;
+    @Mock
+    CustomerRepository repo;
+    @InjectMocks
+    CustomerController controller;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testCreateCustomer(){
+    void testCreateCustomer() {
         logger.info("Inside test create...");
         // Arrange
         //Creating Customer
@@ -100,7 +101,7 @@ class CustomerControllerTest {
 
 
     @Test
-    void testGetAllCustomer(){
+    void testGetAllCustomer() {
         Customer customer1 = new Customer();
         customer1.setId(1L);
         customer1.setFirstName("Andrew");
@@ -127,16 +128,25 @@ class CustomerControllerTest {
     //I am confused on this method. Specifically, on how to test this method, because it has no return type, so
     // return null rakhne ki k rakhne also Mockito.when garda k rakhne
     @Test
-    void testDeleteCustomerById(){
+    public void testDeleteCustomerById() {
         long id = 120L;
         Customer customer = new Customer();
         customer.setId(id);
-        customer.setFirstName("Austin");
-
-        //Mockito.when(repo.deleteById(id)).thenReturn(null);
-
+        customer.setFirstName("Nishchal");
         controller.deleteById(id);
 
         Mockito.verify(repo, Mockito.times(1)).deleteById(Mockito.anyLong());
+    }
+
+    @Test
+    public void testById() {  // this code is not working as expected,so I would like to ask sunil to explain.
+        Customer expectedCustomer = new Customer();
+        long id = 1L;
+        expectedCustomer.setId(id);
+        expectedCustomer.setFirstName("Bibek");
+        Customer actualCustomer = controller.getById(id);
+        // Mockito.verify(repo, Mockito.times(1)).findById(Mockito.anyLong());
+        Mockito.verify(repo, Mockito.times(1)).findById(id);
+        assertEquals(expectedCustomer, actualCustomer);
     }
 }
