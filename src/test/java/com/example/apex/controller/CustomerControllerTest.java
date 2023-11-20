@@ -56,36 +56,30 @@ class CustomerControllerTest {
         // Arrange
         //Creating Customer
         //adfasdf
-        Customer customer = new Customer();
-        customer.setFirstName("Thoth");
+        Customer customer = Customer.builder().id(1001L).firstName("Thoth").build();
 
-        Customer savedCustomer = new Customer();
-        savedCustomer.setId(1001L);
-        savedCustomer.setFirstName("Thoth");
+        Customer expectedCustomer = Customer.builder().id(1001L).firstName("Thoth").build();
 
         logger.info("After customer is created...");
 
-        when(repo.save(any())).thenReturn(savedCustomer);
+        when(repo.save(any(Customer.class))).thenReturn(expectedCustomer);
 
         // Act
         Customer actual = controller.createCustomer(customer);
 
         // Assert
-        assertEquals(actual.getId(), savedCustomer.getId());
-        assertEquals(actual.getFirstName(), savedCustomer.getFirstName());
+        assertEquals(expectedCustomer.getId(), actual.getId());
+        assertEquals(expectedCustomer.getFirstName(), actual.getFirstName());
     }
 
 
     //test2
-
     @Test
     void testFindById() {
         logger.info("Inside test find by Id");
         long id = 1001l;
 
-        Customer returnedCustomer = new Customer();
-        returnedCustomer.setId(1001L);
-        returnedCustomer.setFirstName("Thoth");
+        Customer returnedCustomer = Customer.builder().id(1001L).firstName("Thoth").build();
 
         when(repo.findById(any())).thenReturn(Optional.of(returnedCustomer));
 
@@ -98,16 +92,11 @@ class CustomerControllerTest {
 
     //test3
 
-
     @Test
     void testGetAllCustomer(){
-        Customer customer1 = new Customer();
-        customer1.setId(1L);
-        customer1.setFirstName("Andrew");
+        Customer customer1 = Customer.builder().id(1L).firstName("Andrew").build();
 
-        Customer customer2 = new Customer();
-        customer2.setId(2L);
-        customer2.setFirstName("Austin");
+        Customer customer2 = Customer.builder().id(2L).firstName("Austin").build();
 
         List<Customer> customerList = new ArrayList<>();
         customerList.add(customer1);
@@ -129,14 +118,33 @@ class CustomerControllerTest {
     @Test
     void testDeleteCustomerById(){
         long id = 120L;
-        Customer customer = new Customer();
-        customer.setId(id);
-        customer.setFirstName("Austin");
+        Customer customer = Customer.builder().id(id).firstName("Austin").build();
 
         //Mockito.when(repo.deleteById(id)).thenReturn(null);
 
         controller.deleteById(id);
 
         Mockito.verify(repo, Mockito.times(1)).deleteById(Mockito.anyLong());
+    }
+    @Test
+    void testUpdateCustomer(){
+
+        Customer customer = Customer.builder().id(3L).firstName("karma").lastName("sherpa").build();
+
+        Customer expectedCustomer = Customer.builder().id(3L).firstName("karma").lastName("sherpa1").build();
+
+        logger.info("After customer is updated...");
+
+        when(repo.save(any(Customer.class))).thenReturn(customer);
+
+        // Act
+        Customer actual = controller.updateCustomer(customer);
+
+        // Assert
+        assertEquals(expectedCustomer.getId(), actual.getId());
+        assertEquals(expectedCustomer.getFirstName(), actual.getFirstName());
+        assertNotEquals(expectedCustomer.getLastName(), actual.getLastName());
+        assertTrue(actual.getLastName().equals("sherpa"));
+
     }
 }
