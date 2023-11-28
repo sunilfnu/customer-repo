@@ -1,0 +1,26 @@
+# This is a sample GitLab CI/CD configuration file for a Maven-based Java project
+
+image: maven:3.8.1-jdk-11 # Using Maven 3.8.1 with JDK 11
+
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - .m2/repository # Caches the Maven local repository
+
+# Build stage
+build_job:
+  stage: build
+  script:
+    - mvn compile # Compiles the source code of the project
+  artifacts:
+    paths:
+      - target/ # Keeps the compiled code
+
+# Test stage
+test_job:
+  stage: test
+  script:
+    - mvn test # Runs the unit tests
