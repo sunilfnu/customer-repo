@@ -2,13 +2,54 @@
 
 image: maven:3.8.1-jdk-11 # Using Maven 3.8.1 with JDK 11
 
-stages:
-  - build
-  - test
-
 cache:
   paths:
     - .m2/repository # Caches the Maven local repository
+
+
+stages:
+  - build
+  - test
+  - init
+  - validate
+  - plan
+  - apply
+
+variables:
+  TF_ROOT: ${CI_PROJECT_DIR}
+  TF_ADDRESS: <Terraform Cloud API Address or Your Backend Address>
+  TF_CLI_ARGS_init: -backend-config=address=${TF_ADDRESS}
+
+before_script:
+  - cd ${TF_ROOT}
+  - terraform --version
+  - terraform init
+
+validate:
+  stage: validate
+  script:
+    - terraform validate
+  only:
+    - branches
+
+plan:
+  stage: plan
+  script:
+    - terraform plan -out=tfplan
+  artifacts:
+    paths:
+      - tfplan
+  only:
+    - branches
+  except:
+    - master
+
+apply:
+  stage: apply
+  script:
+    - terraform apply tfplan
+  only:
+    - master
 
 # Build stage
 build_job:
