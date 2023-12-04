@@ -16,12 +16,12 @@ stages:
   - apply
 
 variables:
-  TF_ROOT: ${CI_PROJECT_DIR}
-  TF_ADDRESS: <Terraform Cloud API Address or Your Backend Address>
-  TF_CLI_ARGS_init: -backend-config=address=${TF_ADDRESS}
+  ##TF_ROOT: ${CI_PROJECT_DIR}
+  ##TF_ADDRESS: <Terraform Cloud API Address or Your Backend Address>
+  ##TF_CLI_ARGS_init: -backend-config=address=${TF_ADDRESS}
 
 before_script:
-  - cd ${TF_ROOT}
+  ##- cd ${TF_ROOT}
   - terraform --version
   - terraform init
 
